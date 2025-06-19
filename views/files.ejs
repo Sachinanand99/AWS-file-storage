@@ -1,20 +1,18 @@
-<h2>Files in S3 Bucket</h2>
+<h2>View Files</h2>
+
 <ul>
     <li><a href="/upload">Upload File</a></li>
-</ul>
-<br>
-<% if (links && links.length > 0) { %>
-  <ul>
-    <% links.forEach(file => { %>
-      <li>
-        <a href="<%= file.url %>" target="_blank"><%= file.name %></a>
-        <form action="/delete/<%= encodeURIComponent(file.name) %>" method="POST" style="display:inline;">
-            <button type="submit" onclick="return confirm('Delete <%= file.name %>?')">🗑️</button>
-          </form>
-          
-      </li>
-    <% }); %>
   </ul>
-<% } else { %>
-  <p>No files found.</p>
-<% } %>
+  <br>
+<% links.forEach(file => { %>
+    <li>
+      <a href="<%= file.url %>" target="_blank"><%= file.name %></a>
+  
+      <a href="/versions/<%= encodeURIComponent(file.name) %>">🕒 Versions</a>
+  
+      <form action="/delete/<%= encodeURIComponent(file.name) %>" method="POST" style="display:inline;">
+        <button type="submit" onclick="return confirm('Delete <%= file.name %>?')">🗑️</button>
+      </form>
+    </li>
+  <% }); %>
+  

@@ -1,0 +1,37 @@
+<h2>Versions of <%= versions[0]?.filename || 'file' %></h2>
+<ul>
+  <li><a href="/upload">Upload File</a></li>
+  <li><a href="/files">View Files</a></li>
+</ul>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Version ID</th>
+      <th>Last Modified</th>
+      <th>Size</th>
+      <th>Is Latest?</th>
+      <th>Actions</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% versions.forEach(v => { %>
+      <tr>
+        <td><%= v.versionId %></td>
+        <td><%= new Date(v.lastModified).toLocaleString() %></td>
+        <td><%= (v.size / 1024).toFixed(1) %> KB</td>
+        <td><%= v.isLatest ? "✅" : "" %></td>
+        <td>
+          <a href="/download/<%= encodeURIComponent(v.filename) %>?versionId=<%= encodeURIComponent(v.versionId) %>">Download</a>
+        
+          <form action="/delete-version/<%= encodeURIComponent(v.filename) %>" method="POST" style="display:inline;">
+            <input type="hidden" name="versionId" value="<%= v.versionId %>">
+            <button type="submit" onclick="return confirm('Delete this version?')">🗑️</button>
+          </form>
+        </td>
+        
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

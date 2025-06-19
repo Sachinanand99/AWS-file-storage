@@ -16,6 +16,7 @@ app.use(cors());
 app.use(
   session({ secret: "secretkey", resave: false, saveUninitialized: true })
 );
+app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
