@@ -1,0 +1,13 @@
+<h2>Upload File</h2>
+<ul>
+    <li><a href="/files">View Files</a></li>
+</ul>
+<br>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+
+<% if (message) { %>
+    <p><%= message %></p>
+<% } %>
